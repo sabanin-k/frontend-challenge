@@ -28,10 +28,10 @@ export const Favourites: FC<Props> = ({ handleLike }) => {
                         const isLiked = true
                         return (
                             cat && <CatCard
-                                        cat={cat}
-                                        key={cat.id}
-                                        isLiked={isLiked}
-                                        handleLike={handleLike} />
+                                cat={cat}
+                                key={cat.id}
+                                isLiked={isLiked}
+                                handleLike={handleLike} />
                         )
                     })}
                 </Flex>
@@ -44,11 +44,13 @@ export const Favourites: FC<Props> = ({ handleLike }) => {
                         as='h2'
                         fontSize={20}
                     >
-                        Поставь <Link
-                            to='/'
-                        >
-                            <Text as='span' textDecoration='underline' >котикам</Text> лайк😻
+                        {'Поставь '}
+                        <Link to='/' >
+                            <Text as='span' textDecoration='underline' >
+                                котикам
+                            </Text>
                         </Link>
+                        {' лайк😻'}
                     </Text>
                 </Flex>
             }
@@ -57,6 +59,6 @@ export const Favourites: FC<Props> = ({ handleLike }) => {
 }
 
 
-interface Props{
-    handleLike:(catId: string) => void
+interface Props {
+    handleLike: (catId: string) => void
 }

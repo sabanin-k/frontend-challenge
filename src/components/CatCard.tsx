@@ -1,8 +1,8 @@
 import { Box, Image } from '@chakra-ui/react'
 import { FC } from 'react'
-import { ICat } from '../types'
 import heartIcon from '../assets/vector.png'
 import heartFilledIcon from '../assets/vectorFull.png'
+import { ICat } from '../types'
 
 export const CatCard: FC<Props> = ({ cat, handleLike, isLiked }) => {
     return (
@@ -38,7 +38,8 @@ export const CatCard: FC<Props> = ({ cat, handleLike, isLiked }) => {
                 }}
                 transition='0.3s'
                 _hover={{
-                    transform:'scale(1.1)'
+                    transform:'scale(1.1)',
+                    bg:`url(${heartFilledIcon})`
                 }}
             />
             

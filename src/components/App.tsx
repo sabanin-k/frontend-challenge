@@ -1,14 +1,18 @@
 import { Container } from "@chakra-ui/react";
 import { FC, useCallback, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
-import { Header } from "./Header";
+import { Page404 } from "../pages/404";
 import { Favourites } from "../pages/Favourites";
 import { Home } from "../pages/Home";
-import { useAppDispatch } from "../store/hooks";
-import { addCatToFavourites, fetchCats } from "../store/reducers/catSlice";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { addCatToFavourites, fetchCats, selectFetchingError } from "../store/reducers/catSlice";
+import { Error } from "./common/Error";
+import { Header } from "./Header";
 
 const App: FC = () => {
     const dispatch = useAppDispatch()
+    const fetchingError = useAppSelector(selectFetchingError)
+
     useEffect(() => {
         dispatch(fetchCats())
     }, [dispatch])
@@ -17,17 +21,19 @@ const App: FC = () => {
         dispatch(addCatToFavourites(catId))
     }, [dispatch])
 
+    if (fetchingError) return <Error />
+
     return (
-        <>
-            <Container maxW={'10xl'} centerContent overflowX='hidden' >
-                <Header />
-                <Routes>
-                    <Route path='/' element={<Home handleLike={handleLike} />} />
-                    <Route path='favourites' element={<Favourites handleLike={handleLike} />} />
-                </Routes>
-            </Container>
-        </>
+        <Container maxW={'10xl'} centerContent overflowX='hidden' >
+            <Header />
+            <Routes>
+                <Route path='/' element={<Home handleLike={handleLike} />} />
+                <Route path='favourites' element={<Favourites handleLike={handleLike} />} />
+                <Route path='*' element={<Page404 />} />
+            </Routes>
+        </Container>
     )
 }
+
 
 export default App;
