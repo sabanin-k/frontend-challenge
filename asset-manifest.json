@@ -1,12 +1,14 @@
 {
   "files": {
-    "main.js": "/frontend-challenge/static/js/main.f96a8457.js",
+    "main.js": "/frontend-challenge/static/js/main.f4781b6b.js",
+    "static/js/44.2aa2779c.chunk.js": "/frontend-challenge/static/js/44.2aa2779c.chunk.js",
     "static/media/cat.png": "/frontend-challenge/static/media/cat.1d567d2b55c9260dea40.png",
     "static/media/spinner.svg": "/frontend-challenge/static/media/spinner.67f77e97fa9e2831ec95a42a5831a000.svg",
     "index.html": "/frontend-challenge/index.html",
-    "main.f96a8457.js.map": "/frontend-challenge/static/js/main.f96a8457.js.map"
+    "main.f4781b6b.js.map": "/frontend-challenge/static/js/main.f4781b6b.js.map",
+    "44.2aa2779c.chunk.js.map": "/frontend-challenge/static/js/44.2aa2779c.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.f96a8457.js"
+    "static/js/main.f4781b6b.js"
   ]
 }
