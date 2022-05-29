@@ -3,7 +3,7 @@ import { FC } from 'react'
 import { Link } from 'react-router-dom'
 import catImage from '../assets/cat.png'
 
-export const Page404: FC = () => {
+const Page404: FC = () => {
     return (
         <Container
             maxW={'7xl'}
@@ -30,3 +30,5 @@ export const Page404: FC = () => {
         </Container>
     )
 }
+
+export default Page404

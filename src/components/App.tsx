@@ -1,13 +1,14 @@
 import { Container } from "@chakra-ui/react";
-import { FC, useCallback, useEffect } from "react";
+import { FC, lazy, Suspense, useCallback, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
-import { Page404 } from "../pages/404";
 import { Favourites } from "../pages/Favourites";
 import { Home } from "../pages/Home";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { addCatToFavourites, fetchCats, selectFetchingError } from "../store/reducers/catSlice";
 import { Error } from "./common/Error";
 import { Header } from "./Header";
+
+const Page404 = lazy(() => import('../pages/404'))
 
 const App: FC = () => {
     const dispatch = useAppDispatch()
@@ -29,7 +30,7 @@ const App: FC = () => {
             <Routes>
                 <Route path='/' element={<Home handleLike={handleLike} />} />
                 <Route path='favourites' element={<Favourites handleLike={handleLike} />} />
-                <Route path='*' element={<Page404 />} />
+                <Route path='*' element={<Suspense><Page404 /></Suspense>} />
             </Routes>
         </Container>
     )

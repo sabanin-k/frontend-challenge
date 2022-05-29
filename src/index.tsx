@@ -1,9 +1,9 @@
+import { ChakraProvider } from '@chakra-ui/react';
 import ReactDOM from 'react-dom/client';
-import { ChakraProvider } from '@chakra-ui/react'
-import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { store } from './store';
+import { HashRouter } from 'react-router-dom';
 import App from './components/App';
+import { store } from './store';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -11,9 +11,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <ChakraProvider resetCSS >
     <Provider store={store}>
-      <BrowserRouter>
+      <HashRouter>
         <App />
-      </BrowserRouter>
+      </HashRouter>
     </Provider>
   </ChakraProvider>
 )
