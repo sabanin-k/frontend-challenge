@@ -15,22 +15,22 @@ const catSlice = createSlice({
     name: 'cats',
     initialState: {
         cats: [] as ICat[],
-        favCats: [] as ICat[],
+        favCats: [] as string[],
         pageIndex: 0
     },
     reducers: {
         increasePageIndex: (state) => {
             state.pageIndex = state.pageIndex + 1
         },
-        addCatToFavourites: (state, action: PayloadAction<ICat>) => {
+        addCatToFavourites: (state, action: PayloadAction<string>) => {
             state.favCats.includes(action.payload)
-            ? state.favCats.filter(cat => cat !== action.payload)
+            ? state.favCats = state.favCats.filter(id => id !== action.payload)
             : state.favCats.push(action.payload)
         }
     },
     extraReducers: {
         [fetchCats.fulfilled.type]: (state, action: PayloadAction<ICat[]>) => {
-            state.cats = action.payload
+            state.cats = [...state.cats, ...action.payload]
         }
     }
 })

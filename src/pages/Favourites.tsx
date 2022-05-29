@@ -1,15 +1,13 @@
-import { Container, Flex } from '@chakra-ui/react'
+import { Container, Flex, Text } from '@chakra-ui/react'
 import { FC } from 'react'
-import { Card } from '../components/Card'
+import { Link } from 'react-router-dom'
+import { CatCard } from '../components/CatCard'
 import { useAppSelector } from '../store/hooks'
-import { selectFavCats } from '../store/reducers/catSlice'
+import { selectCats, selectFavCats } from '../store/reducers/catSlice'
 
-export const Favourites: FC = () => {
+export const Favourites: FC<Props> = ({ handleLike }) => {
     const favCats = useAppSelector(selectFavCats)
-
-    const handleLike = (catId: string) => {
-        console.log(favCats);
-    }
+    const cats = useAppSelector(selectCats)
 
     return (
         <Container
@@ -19,17 +17,46 @@ export const Favourites: FC = () => {
             centerContent
             as='main'
         >
-            <Flex
-                direction='row'
-                wrap='wrap'
-                gap={29}
-            >
-                {favCats.map(cat => {
-                    return (
-                        <Card cat={cat} key={cat.id} handleLike={handleLike} />
-                    )
-                })}
-            </Flex>
+            {favCats.length !== 0
+                ? <Flex
+                    direction='row'
+                    wrap='wrap'
+                    gap={29}
+                >
+                    {favCats.map(id => {
+                        const cat = cats.find(cat => cat.id === id)
+                        const isLiked = true
+                        return (
+                            cat && <CatCard
+                                        cat={cat}
+                                        key={cat.id}
+                                        isLiked={isLiked}
+                                        handleLike={handleLike} />
+                        )
+                    })}
+                </Flex>
+                : <Flex
+                    h='50vh'
+                    justify='center'
+                    align='center'
+                >
+                    <Text
+                        as='h2'
+                        fontSize={20}
+                    >
+                        Поставь <Link
+                            to='/'
+                        >
+                            <Text as='span' textDecoration='underline' >котикам</Text> лайк😻
+                        </Link>
+                    </Text>
+                </Flex>
+            }
         </Container>
     )
+}
+
+
+interface Props{
+    handleLike:(catId: string) => void
 }

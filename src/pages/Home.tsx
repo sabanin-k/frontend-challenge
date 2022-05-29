@@ -1,21 +1,13 @@
 import { Button, Container, Flex } from '@chakra-ui/react'
-import { FC, useCallback, useEffect } from 'react'
-import { Card } from '../components/Card'
+import { FC } from 'react'
+import { CatCard } from '../components/CatCard'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
-import { addCatToFavourites, fetchCats, increasePageIndex, selectCats } from '../store/reducers/catSlice'
+import { fetchCats, increasePageIndex, selectCats, selectFavCats } from '../store/reducers/catSlice'
 
-export const Home: FC = () => {
+export const Home: FC<Props> = ({ handleLike }) => {
     const dispatch = useAppDispatch()
-    useEffect(() => {
-        dispatch(fetchCats())
-    }, [dispatch])
-
     const cats = useAppSelector(selectCats)
-
-    const handleLike = useCallback((catId: string) => {
-        const likedCat = cats.filter(cat => cat.id === catId)
-        dispatch(addCatToFavourites(likedCat[0]))
-    }, [cats, dispatch])
+    const favCats = useAppSelector(selectFavCats)
 
     return (
         <>
@@ -27,15 +19,18 @@ export const Home: FC = () => {
                 as='main'
             >
                 <Flex
+                    justify='center'
                     direction='row'
                     wrap='wrap'
                     gap={29}
                 >
                     {cats.map((cat) => {
+                        const isLiked = favCats.includes(cat.id)
                         return (
-                            <Card
+                            <CatCard
                                 cat={cat}
                                 key={cat.id}
+                                isLiked={isLiked}
                                 handleLike={handleLike}
                             />
                         )
@@ -51,4 +46,9 @@ export const Home: FC = () => {
             </Container>
         </>
     )
+}
+
+
+interface Props{
+    handleLike:(catId: string) => void
 }

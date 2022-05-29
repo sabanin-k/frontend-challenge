@@ -4,11 +4,17 @@ import { ICat } from '../types'
 import heartIcon from '../assets/vector.png'
 import heartFilledIcon from '../assets/vectorFull.png'
 
-export const Card: FC<Props> = ({ cat, handleLike }) => {
+export const CatCard: FC<Props> = ({ cat, handleLike, isLiked }) => {
     return (
         <Box
             position='relative'
             className='box'
+            transition= 'transform 0.3s'
+            _hover={{
+                transform: 'scale(1.1)',
+                boxShadow: '0px 6px 5px rgba(0, 0, 0, 0.24), 0px 9px 18px rgba(0, 0, 0, 0.18)',
+                WebkitTransition: '0.3s'
+            }}
         >
             <Image
                 boxSize='225px'
@@ -18,7 +24,7 @@ export const Card: FC<Props> = ({ cat, handleLike }) => {
             />
             <Image
                 onClick={() => handleLike(cat.id)}
-                src={true ? heartIcon : heartFilledIcon}
+                src={isLiked ? heartFilledIcon : heartIcon}
                 position='absolute'
                 bottom={4}
                 right={3}
@@ -30,6 +36,10 @@ export const Card: FC<Props> = ({ cat, handleLike }) => {
                         display: 'block'
                     }
                 }}
+                transition='0.3s'
+                _hover={{
+                    transform:'scale(1.1)'
+                }}
             />
             
         </Box>
@@ -39,5 +49,6 @@ export const Card: FC<Props> = ({ cat, handleLike }) => {
 
 interface Props {
     cat: ICat
+    isLiked: boolean
     handleLike: (catId: string) => void
 }
