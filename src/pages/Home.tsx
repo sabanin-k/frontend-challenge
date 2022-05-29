@@ -4,12 +4,14 @@ import { CatCard } from '../components/CatCard'
 import { Preloader } from '../components/common/Preloader'
 import { UpButton } from '../components/common/UpButton'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
+import { changeTabTitle } from '../utils/changeTabTitle'
 import {
     fetchCats, increasePageIndex, selectCats,
     selectFavCats, selectInitialization, selectLoading
 } from '../store/reducers/catSlice'
 
 export const Home: FC<Props> = ({ handleLike }) => {
+    changeTabTitle('Котики | Pintercats')
     const dispatch = useAppDispatch()
     const cats = useAppSelector(selectCats)
     const favCats = useAppSelector(selectFavCats)

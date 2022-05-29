@@ -1,9 +1,11 @@
 import { Container, Flex, Image, Text } from '@chakra-ui/react'
 import { FC } from 'react'
 import { Link } from 'react-router-dom'
+import { changeTabTitle } from '../utils/changeTabTitle'
 import catImage from '../assets/cat.png'
 
 const Page404: FC = () => {
+    changeTabTitle('Страница не найдена')
     return (
         <Container
             maxW={'7xl'}

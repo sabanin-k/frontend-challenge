@@ -4,8 +4,10 @@ import { Link } from 'react-router-dom'
 import { CatCard } from '../components/CatCard'
 import { useAppSelector } from '../store/hooks'
 import { selectCats, selectFavCats } from '../store/reducers/catSlice'
+import { changeTabTitle } from '../utils/changeTabTitle'
 
 export const Favourites: FC<Props> = ({ handleLike }) => {
+    changeTabTitle('Любимые котики | Pintercats')
     const favCats = useAppSelector(selectFavCats)
     const cats = useAppSelector(selectCats)
 
@@ -19,6 +21,7 @@ export const Favourites: FC<Props> = ({ handleLike }) => {
         >
             {favCats.length !== 0
                 ? <Flex
+                    justify='center'
                     direction='row'
                     wrap='wrap'
                     gap={29}
